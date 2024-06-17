@@ -1,0 +1,93 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    overflow-x: hidden;
+    text-align: center;
+}
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#scoreboard {
+    margin-bottom: 20px;
+}
+#play-area {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2em;
+    cursor: pointer;
+    user-select: none;
+}
+#restart-button, #play-again-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#end-game{
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes rainbow {
+    0% {
+      color: #ff0000;
+    }
+    14% {
+      color: #ff7f00;
+    }
+    28% {
+      color: #ffff00;
+    }
+    42% {
+      color: #00ff00;
+    }
+    57% {
+      color: #0000ff;
+    }
+    71% {
+      color: #4b0082;
+    }
+    85% {
+      color: #8b00ff;
+    }
+    100% {
+      color: #ff0000;
+    }
+  }
+  
+  #last-round-winner {
+    font-size: 2em;
+    font-weight: bold;
+    display: inline-block;
+    animation: rainbow 3s linear infinite;
+  }
+  
+
+#player-turn {
+    margin-bottom: 20px;
+}
