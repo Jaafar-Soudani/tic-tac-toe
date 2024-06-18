@@ -2,18 +2,18 @@
 This is a simple implementation of the classic game of Tic-Tac-Toe.
 
 1. **Initialization**: The game board is represented by an array of cells. Each cell corresponds to a spot on the game board. The game also keeps track of whose turn it is (`isPlayerOneTurn`), the scores of Player 1 and Player 2 (`player1Score` and `player2Score`), and the winner of the last round (`lastTurnWinner`).
-![alt text](tic-tac-toe/images/Initialize.png)
+![alt text](images/Initialize.png)
 
 2. **Gameplay**: Players take turns clicking on a cell of the game board. The `handleClick` function is triggered when a cell is clicked. This function updates the cell with the current player's symbol ('X' for Player 1 and 'O' for Player 2), checks if the current player has won with `checkWin`, or if the game is a draw with `checkDraw`.
-![alt text](tic-tac-toe/images/Gameplay.png)
+![alt text](images/Gameplay.png)
 
 
 3. **Winning the Game**: The `checkWin` function checks if the current player's symbols form a winning combination on the game board. The winning combinations are the 8 possible ways to get three in a row in Tic-Tac-Toe: 3 rows, 3 columns, and 2 diagonals.
-![alt text](tic-tac-toe/images/Win.png)
+![alt text](images/Win.png)
 
 
 4. **Draw Condition**: The `checkDraw` function checks if all cells on the board have been filled and no player has won, in which case the game is a draw.
-![alt text](tic-tac-toe/images/Draw.png)
+![alt text](images/Draw.png)
 
 
 5. **End of Round**: If a player wins or the game is a draw, the `enablePlayAgain` function is called to display the "Play Again" button and hide the game board.
