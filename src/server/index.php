@@ -1,34 +1,46 @@
 <?php
-session_start();
+//suppress warnings
+error_reporting(0);
 
+session_start();
 // CORS stuff
+
+
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 // Route the requests to the appropriate function
 $requestUri = $_SERVER["REQUEST_URI"];
+$seg_arr = array_filter(explode('/', explode('?', $requestUri)[0]));
+$lastSegment = end($seg_arr);
 
-switch ($requestUri) {
-    case '/state':
+//Handle AJAX request
+switch ($lastSegment) {
+    case 'start':
+        init_session();
+        setNames($_GET['player1'], $_GET['player2']);
         getGameState();
         break;
-    case '/move':
-        $pos = $_POST['position'];
+    case 'state':
+        getGameState();
+        break;
+    case 'move':
+        $pos = $_GET['position'];
         makeMove($pos);
+    case 'check':
+        checkWin();
         getGameState();
         break;
-    case '/check':
-        $_SESSION['checkWin'] = checkWin();
-        getGameState();
-    case '/reset':
+    case 'reset':
         reset_board();
         http_response_code(200);
-        echo json_encode(['error' => '']);
+        init_session();
+        getGameState();
         break;
     default:
         http_response_code(404);
-        echo json_encode(['error' => 'Not Found']);
+        echo json_encode(['error' => 'Not Found', 'uri'=> $lastSegment, 'post' => $_GET]);
         break;
 }
 
@@ -74,8 +86,9 @@ function checkWin(){
         $a = $combination[0];
         $b = $combination[1];
         $c = $combination[2];
-        if( $XOArray[$a] == $currentPlayer && XOarray[$b] == $currentPlayer && XOarray[$c]==$currentPlayer){
-            return 2;
+        if( $XOArray[$a] == $currentPlayer && $XOArray[$b] == $currentPlayer && $XOArray[$c]==$currentPlayer){
+            $_SESSION['checkWin'] = 2;
+            return;
         }
     }
 
@@ -84,11 +97,13 @@ function checkWin(){
     for($i = 0; $i<9; $i++){
         $cellFull = $XOArray[$i] == "X" || $XOArray[$i] == "O";
         if(! $cellFull){
-            return 1;
+            $_SESSION['checkWin'] = 1;
+            return;
         }
     }
 
     //otherwise, game continues
+    $_SESSION['checkWin'] = 0;
     return 0;
 
 }
@@ -98,10 +113,9 @@ function checkWin(){
 function makeMove($CELL_POSITION){
     
     $currentPlayer = $_SESSION['isPlayerOneTurn'] ? "X" : "O";
-    $XOArray = $_SESSION['XOArray'];
-    if($XOArray[$CELL_POSITION] == "")
+    if($_SESSION["XOArray"][$CELL_POSITION] == "")
     {
-        $XOArray[$CELL_POSITION] == $currentPlayer;
+        $_SESSION["XOArray"][$CELL_POSITION] = $currentPlayer;
         $_SESSION['isPlayerOneTurn'] = ! $_SESSION['isPlayerOneTurn'] ;
 
     }
