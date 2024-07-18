@@ -32,5 +32,6 @@ checkWin session variable is set to 0.
 
 10. **Update Recent Players List**: The updateUI() function updates the "Most Recent Players" list in the UI by iterating over the recentPlayers array received from the server. For each player in the array, it creates a new list item (<li>) element and appends it to the "Most Recent Players" list.
 
+
 The game continues until a player wins or the game ends in a draw. The client-side JavaScript code handles user interactions and updates the UI based on the game state received from the server.
 By updating the UI elements based on the game state received from the server, the client-side JavaScript code ensures that the user interface reflects the current state of the game, including the game board, player turn, win/draw status, and the list of recent players.
