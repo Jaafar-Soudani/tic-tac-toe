@@ -1,4 +1,6 @@
 /** Init variables */
+
+console.log("Hi");
 const cells = document.querySelectorAll('[data-cell]');
 const playerTurnElement = document.getElementById('player-turn');
 const player1ScoreElement = document.getElementById('player1-score');
@@ -15,12 +17,32 @@ let player1Score = 0;
 let player2Score = 0;
 let lastTurnWinner = '';
 
+async function enablePlayAgain(boolVal){
+    playAgainbtn.hidden = boolVal;
+}
+
+$.ajaxSetup({
+    xhrFields: {
+      withCredentials: true
+    }
+  });
 // Function to make a GET request to the server
 async function makeRequest(endpoint, params = {}) {
-    const url = new URL(`http://localhost/tic-tac-toe/${endpoint}`);
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
-    const response = await fetch(url);
-    return response.json();
+    const toRet =  $.ajax({
+        url: `http://localhost/tic-tac-toe/${endpoint}`,
+        method: 'GET',
+        data: params,
+        dataType: 'json',
+        crossDomain: true,
+        xhrFields: {
+            withCredentials: true
+         }, 
+         success: function(data, textStatus, request){
+            console.log(request);
+       },
+         
+     });
+     return toRet;
 }
 
 // Function to start a new game

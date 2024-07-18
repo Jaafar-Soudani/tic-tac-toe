@@ -3,12 +3,11 @@
 error_reporting(0);
 
 session_start();
-// CORS stuff
 
 
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
+$_SESSION['cookie_data'] = $_COOKIE;
+
+
 
 // Route the requests to the appropriate function
 $requestUri = $_SERVER["REQUEST_URI"];
@@ -17,6 +16,21 @@ $lastSegment = end($seg_arr);
 
 //Handle AJAX request
 switch ($lastSegment) {
+    case 'game':
+        // Serve HTML content
+        header('Content-Type: text/html');
+        readfile('index.html');
+        break;
+    case 'style.css':
+        // Serve CSS content
+        header('Content-Type: text/css');
+        readfile('style.css');
+        break;
+    case 'index.js':
+        // Serve JavaScript content
+        header('Content-Type: application/javascript');
+        readfile('index.js');
+        break;
     case 'start':
         init_session();
         setNames($_GET['player1'], $_GET['player2']);
