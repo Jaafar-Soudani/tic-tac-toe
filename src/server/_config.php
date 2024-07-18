@@ -19,15 +19,3 @@ function resolve_path($name)
         return "../{$name}";
     }
 
-    return file_exists($publicRoot) ? realpath($publicRoot) : realpath($appRoot);
-}
-
-spl_autoload_register(function ($fullName) {
-    $parts = explode("\\", $fullName);
-    $len = count($parts);
-    $className = $parts[$len - 1];
-    if (file_exists($GLOBALS["appDir"] . "/models/{$className}.php"))
-    {
-      require_once $GLOBALS["appDir"] . "/models/{$className}.php";
-    }
-});
