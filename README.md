@@ -30,4 +30,7 @@ checkWin session variable is set to 0.
 
 9. **Update Game Board**: The updateUI() function iterates over the XOArray received from the server, which represents the current state of the game board.For each cell in the game board, it checks the corresponding value in the XOArray. If the value is 'X', it sets the text content of the corresponding cell element to 'X'. If the value is 'O', it sets the text content of the corresponding cell element to 'O'. If the value is empty, it clears the text content of the corresponding cell element.
 
-10. **Update Recent Players List**: The updateUI() function updates the "Most Recent Players" list in the UI by iterating over the recentPlayers array received from the server.For each player in the array, it creates a new list item ( <li> ) element and appends it to the "Most Recent Players" list.
+10. **Update Recent Players List**: The updateUI() function updates the "Most Recent Players" list in the UI by iterating over the recentPlayers array received from the server. For each player in the array, it creates a new list item (<li>) element and appends it to the "Most Recent Players" list.
+
+The game continues until a player wins or the game ends in a draw. The client-side JavaScript code handles user interactions and updates the UI based on the game state received from the server.
+By updating the UI elements based on the game state received from the server, the client-side JavaScript code ensures that the user interface reflects the current state of the game, including the game board, player turn, win/draw status, and the list of recent players.
