@@ -57,13 +57,16 @@ switch ($lastSegment) {
 
 //* Function to initialize the session variables
 function init_session(){  
-    session_destroy();
-    session_start();
+    //session_destroy();
+    //session_start();
     $_SESSION['isPlayerOneTurn'] = true;
     $_SESSION['XOArray'] = array_fill(0, 9, ""); 
     $_SESSION['checkWin'] = 0;
     $_SESSION['player1'] = "player1";
     $_SESSION['player2'] = "player2";
+    if(!isset($_SESSION['recents'])){
+        $_SESSION['recents'] = array();
+    }
 }
 
 //** Function to set the player names  */
@@ -73,7 +76,7 @@ function setNames($player1, $player2){
     $_SESSION['player1'] = $player1;
     $_SESSION['player2'] = $player2;
     //TODO: add code to place them in "most recent players"
-
+    appendRecentPlayers($player1, $player2, $_SESSION['recents']);
 }
 
 //** Function to check for a win */
@@ -149,3 +152,14 @@ function getGameState(){
     echo json_encode($_SESSION);
 }
 
+
+
+//** Function to add players to the recents array */
+function appendRecentPlayers($player1, $player2, &$recentPlayers) {
+    if (count($recentPlayers) < 5) {
+        $recentPlayers[] = [$player1, $player2];
+    } else {
+        array_shift($recentPlayers);
+        $recentPlayers[] = [$player1, $player2];
+    }
+}

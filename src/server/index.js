@@ -7,7 +7,7 @@ const player2ScoreElement = document.getElementById('player2-score');
 const lastRoundWinner = document.getElementById('last-round-winner');
 const playAgain = document.getElementById('end-game');
 const playArea = document.getElementById('play-area');
-
+const recents = document.getElementById('recents');
 const player1Input = document.getElementById('player1');
 const player2Input = document.getElementById('player2');
 
@@ -62,7 +62,6 @@ async function makeRequest(endpoint, params = {}) {
 async function startGame() {
     const player1 = player1Input.value;
     const player2 = player2Input.value;
-    console.log(player1, player2);
     const response = await makeRequest('start', { player1, player2 });
     updateUI(response);
     enablePlayAgain(false);
@@ -109,6 +108,18 @@ function updateUI(gameState) {
     cells.forEach((cell, index) => {
         cell.textContent = gameState? gameState.XOArray[index] || '' : '';
     });
+    pairs = gameState? gameState.recents || [] : [];
+    const ul = document.createElement('ul');
+    pairs.reverse().forEach(pair => {
+        const li = document.createElement('li');
+        li.textContent = `${pair[0]} vs ${pair[1]}`;
+        ul.appendChild(li);
+    });
+    while (recents.firstChild) {
+        recents.removeChild(recents.firstChild);
+    }
+    recents.appendChild(ul);
+
 }
 
 // Event listeners
