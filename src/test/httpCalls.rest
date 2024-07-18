@@ -1,0 +1,27 @@
+
+GET http://localhost/tic-tac-toe/start?player1=P1&player2=P2
+
+#####
+GET http://localhost/tic-tac-toe/move?position=0
+
+#####
+GET http://localhost/tic-tac-toe/move?position=6
+
+#####
+GET http://localhost/tic-tac-toe/move?position=1
+
+#####
+GET http://localhost/tic-tac-toe/move?position=7
+#####
+GET http://localhost/tic-tac-toe/move?position=3
+
+
+#####
+GET http://localhost/tic-tac-toe/move?position=8
+
+
+###
+GET http://localhost/tic-tac-toe/check
+
+#####
+GET http://localhost/tic-tac-toe/reset

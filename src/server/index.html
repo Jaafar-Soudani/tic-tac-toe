@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
@@ -35,10 +37,19 @@
 
         <div id="end-game">
             <span id="last-round-winner"></span>
-            <button id="play-again-button">Play again</button>
+            <label for="player1">Player 1:</label>    
+            <input id="player1" type="text"/>
+            <label for="player2">Player 2:</label>    
+            <input id="player2" type="text"/>
+            <button id="play-again-button">Play</button>
         </div>
         
         <button id="restart-button">Reset Game</button>
+
+        <h3>Recent Players:</h3>
+        <div id="recents">
+
+        </div>
     </main>
 </body>
 <script src="index.js"></script>
