@@ -5,9 +5,6 @@ error_reporting(0);
 session_start();
 
 
-$_SESSION['cookie_data'] = $_COOKIE;
-
-
 
 // Route the requests to the appropriate function
 $requestUri = $_SERVER["REQUEST_URI"];
@@ -108,12 +105,17 @@ function checkWin(){
 
 
     //then check if there's a draw
+    $emptyFound = false;
     for($i = 0; $i<9; $i++){
         $cellFull = $XOArray[$i] == "X" || $XOArray[$i] == "O";
         if(! $cellFull){
-            $_SESSION['checkWin'] = 1;
-            return;
+            $emptyFound = true;
+            break;
         }
+    }
+    if(!$emptyFound){
+        $_SESSION['checkWin'] = 1;
+        return;
     }
 
     //otherwise, game continues
